@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>献给秦晓宇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 爱心特效 */
+        .heart-effect {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b81;
+            animation: heartFloat 15s infinite linear;
+            opacity: 0;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255,107,129,0.6);
+            filter: drop-shadow(0 0 8px rgba(255,107,129,0.4));
+            pointer-events: none;
+        }
+        
+        .heart-effect.small {
+            font-size: 18px;
+            animation-duration: 12s;
+        }
+        
+        .heart-effect.medium {
+            font-size: 24px;
+            animation-duration: 15s;
+        }
+        
+        .heart-effect.large {
+            font-size: 32px;
+            animation-duration: 18s;
+        }
+        
+        .heart-effect.xlarge {
+            font-size: 40px;
+            animation-duration: 20s;
+        }
+        
+        /* 不同颜色的爱心 */
+        .heart-effect.color1 { color: #ff6b81; }
+        .heart-effect.color2 { color: #ff4757; }
+        .heart-effect.color3 { color: #ff8fa3; }
+        .heart-effect.color4 { color: #ffa5b0; }
+        .heart-effect.color5 { color: #ffd3d6; }
+        .heart-effect.color6 { color: #ff1493; }
+        .heart-effect.color7 { color: #ff69b4; }
+        .heart-effect.color8 { color: #ffb6c1; }
+        
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+                transform: translateY(90vh) translateX(10px) rotate(10deg) scale(1);
+            }
+            30% {
+                transform: translateY(70vh) translateX(-15px) rotate(120deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(50vh) translateX(20px) rotate(240deg) scale(1.2);
+            }
+            70% {
+                transform: translateY(30vh) translateX(-10px) rotate(300deg) scale(1.1);
+            }
+            90% {
+                opacity: 0.9;
+                transform: translateY(10vh) translateX(15px) rotate(350deg) scale(1);
+            }
+            100% {
+                transform: translateY(-100px) translateX(25px) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+        
+        /* 心跳爱心 */
+        .pulse-heart {
+            position: absolute;
+            font-size: 48px;
+            color: #ff6b81;
+            animation: pulse 2s infinite ease-in-out;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(255,107,129,0.8);
+            pointer-events: none;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        /* 登录页面样式 */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .login-form:hover {
+            transform: translateY(-5px);
+        }
+        
+        .login-form h1 {
+            color: #ff6b81;
+            margin-bottom: 30px;
+            font-size: 28px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .login-form h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #ff6b81;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .login-form input:focus {
+            border-color: #ff6b81;
+            outline: none;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .login-form button:hover {
+            background: #ff4757;
+        }
+        
+        /* 主页面样式 */
+        .main-content {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #ff6b81, #ff8fa3);
+            color: white;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .heart {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 情书页面样式 */
+        .love-letter {
+            padding: 40px;
+            line-height: 1.8;
+            min-height: 500px;
+            position: relative;
+        }
+        
+        .love-letter h2 {
+            color: #ff6b81;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .letter-content {
+            font-size: 18px;
+            text-align: left;
+            padding: 30px;
+            background: #fff9f9;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b81;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            margin-bottom: 20px;
+        }
+        
+        .letter-content p {
+            margin-bottom: 20px;
+        }
+        
+        .letter-content h1, .letter-content h2, .letter-content h3 {
+            color: #ff6b81;
+            margin: 20px 0 10px 0;
+        }
+        
+        .letter-content ul, .letter-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .letter-content blockquote {
+            border-left: 4px solid #ff6b81;
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .letter-content code {
+            background: #ffe6e6;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .letter-content pre {
+            background: #ffe6e6;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #ff6b81;
+        }
+        
+        /* 翻页按钮 */
+        .page-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .page-btn {
+            padding: 10px 20px;
+            background: #ff6b81;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .page-btn:hover {
+            background: #ff4757;
+        }
+        
+        .page-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        /* 音乐播放器样式 */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .music-player:hover {
+            transform: scale(1.05);
+        }
+        
+        .music-player button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff6b81;
+            margin: 0 5px;
+            transition: color 0.3s;
+        }
+        
+        .music-player button:hover {
+            color: #ff4757;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            margin-left: 5px;
+        }
+        
+        .music-title {
+            font-size: 14px;
+            margin-left: 10px;
+            color: #555;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .login-form {
+                padding: 30px 20px;
+            }
+            
+            .love-letter {
+                padding: 20px;
+            }
+            
+            .letter-content {
+                padding: 20px;
+                font-size: 16px;
+            }
+            
+            header h1 {
+                font-size: 28px;
+            }
+            
+            .music-player {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 15px;
+            }
+            
+            .volume-slider {
+                width: 60px;
+            }
+            
+            .heart-effect, .pulse-heart {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .music-player {
+                flex-direction: column;
+                border-radius: 15px;
+                padding: 10px;
+                width: 150px;
+            }
+            
+            .volume-control {
+                margin: 5px 0 0 0;
+                width: 100%;
+            }
+            
+            .volume-slider {
+                width: 100%;
+            }
+            
+            .page-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .page-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录页面 -->
+    <div class="container">
+        <div class="login-container" id="loginPage">
+            <div class="login-form">
+                <h1>我们的秘密花园</h1>
+                <input type="password" id="password" placeholder="请输入密码...">
+                <button id="loginBtn">进入</button>
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">提示：密码是你的生日</p>
+            </div>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <div class="main-content" id="mainContent">
+            <header>
+                <div class="heart">❤️</div>
+                <h1>致我最爱的人</h1>
+                <p>你是我生命中最美的相遇</p>
+            </header>
+            
+            <div class="love-letter">
+                <h2>给亲爱的晓宇</h2>
+                <div class="letter-content" id="letterContent">
+                    <!-- Markdown内容将通过JavaScript动态渲染 -->
+                </div>
+                
+                <div class="page-controls">
+                    <button class="page-btn" id="prevPage"><i class="fas fa-chevron-left"></i> 上一页</button>
+                    <button class="page-btn" id="nextPage">下一页 <i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="page-indicator" id="pageIndicator">第 1 页，共 3 页</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 音乐播放器 -->
+    <div class="music-player">
+        <button id="playBtn"><i class="fas fa-play"></i></button>
+        <button id="pauseBtn"><i class="fas fa-pause"></i></button>
+        <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+        </div>
+        <span class="music-title">Windy Hill</span>
+    </div>
+    
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <!-- 这里使用一个免费的浪漫音乐链接 -->
+        <source src="Xiaoyu-and-Yi/Windy%20Hill.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 页面元素
+        const loginPage = document.getElementById('loginPage');
+        const mainContent = document.getElementById('mainContent');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const letterContent = document.getElementById('letterContent');
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const pageIndicator = document.getElementById('pageIndicator');
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        
+        // 设置密码
+        const correctPassword = "070930";
+        
+        // 定义情书内容（Markdown格式）
+        const loveLetters = [
+            `# 第一页：初遇
+
+山有木兮木有枝，心悦君兮君不知。
+
+在组织部的迎新晚会上初见你，惊鸿一瞥，你的身影便深深印刻在我心里。人们常说"一见钟情"，而我更愿意相信，那晚的惊鸿一瞥，是灵魂先于理智认出了你。吸引我的，远不只你的美貌，还有你气质中的优雅高贵，举止中的落落大方。入目无他人，四下皆是你。那个迎新晚会上，我的眼里只有你。
+`,
+
+            `# 第二页：缘起
+
+你端坐于钢琴前的优美身影，连同那流淌的天籁之音，让我春心萌动。我不知道我听了多少遍，闭上眼，优美的琴声总是指引我想起你。"行也思君，坐也思君"。本以为那惊鸿一面已是幸运，未曾想，三日后讲座结束，我们竟在逸夫楼门口重逢。那天与你不期而遇，我鼓起勇气向你打招呼，开始了我们的首次对话。回到宿舍之后我们又在微信上畅聊。对你的爱慕使我期待你的每一条消息，让我总是情不自禁地寻找话题。与你聊天，成了我每日最快乐的期待。
+
+此后的日子里，我们一起参与定向越野活动，一起聚餐玩桌游，一起去图书馆学习。你的笑容灿烂如阳光，能驱散我所有的阴霾；而你的自律、优秀、乐观与负责，更让我由衷地仰慕。`,
+
+            `# 第三页：告白
+
+我喜欢你，不知你是否也对我怀有一丝同样的好感？
+
+可不可以让我成为你身边那个重要的人，在你身边守护你，陪伴你？想和你共赏红日初升；想和你同观晚霞满天；想和你共看春意盎然；想和你同赏茫茫白雪；想和你携手学海漫游；想和你并肩前往人生的下一座春山，成就更优秀的彼此……
+
+所以，我想郑重地问你：你愿意成为我的女朋友吗？
+
+我等待着你的答案，期盼着我们能共同执笔，书写这段浪漫的史诗。
+
+<div class="signature">爱你的，<br>鲁毅</div>`
+        ];
+        
+        let currentPage = 0;
+        
+        // 创建漂浮爱心特效
+        function createFloatingHearts() {
+            const heartCount = 40; // 增加爱心数量
+            const heartIcons = ['❤', '💖', '💕', '💗', '💓', '💞', '💘'];
+            const sizes = ['small', 'medium', 'large', 'xlarge'];
+            const colors = ['color1', 'color2', 'color3', 'color4', 'color5', 'color6', 'color7', 'color8'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = `heart-effect ${sizes[Math.floor(Math.random() * sizes.length)]} ${colors[Math.floor(Math.random() * colors.length)]}`;
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 20 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // 创建心跳爱心特效
+        function createPulseHearts() {
+            const pulseCount = 8;
+            for (let i = 0; i < pulseCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'pulse-heart';
+                heart.innerHTML = '❤';
+                heart.style.left = (10 + Math.random() * 80) + 'vw';
+                heart.style.top = (10 + Math.random() * 80) + 'vh';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // 登录功能
+        loginBtn.addEventListener('click', function() {
+            if (passwordInput.value === correctPassword) {
+                loginPage.style.display = 'none';
+                mainContent.style.display = 'block';
+                // 渲染第一页情书
+                renderLetter(currentPage);
+                // 初始化音乐播放器
+                initMusicPlayer();
+                // 创建特效
+                createFloatingHearts();
+                createPulseHearts();
+            } else {
+                alert('密码错误，请重新输入！');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+        
+        // 按Enter键登录
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+        
+        // 渲染情书内容
+        function renderLetter(pageIndex) {
+            const markdownContent = loveLetters[pageIndex];
+            letterContent.innerHTML = marked.parse(markdownContent);
+            updatePageControls();
+        }
+        
+        // 更新翻页控制
+        function updatePageControls() {
+            pageIndicator.textContent = `第 ${currentPage + 1} 页，共 ${loveLetters.length} 页`;
+            prevPageBtn.disabled = currentPage === 0;
+            nextPageBtn.disabled = currentPage === loveLetters.length - 1;
+        }
+        
+        // 上一页
+        prevPageBtn.addEventListener('click', function() {
+            if (currentPage > 0) {
+                currentPage--;
+                renderLetter(currentPage);
+            }
+        });
+        
+        // 下一页
+        nextPageBtn.addEventListener('click', function() {
+            if (currentPage < loveLetters.length - 1) {
+                currentPage++;
+                renderLetter(currentPage);
+            }
+        });
+        
+        // 初始化音乐播放器
+        function initMusicPlayer() {
+            // 设置初始音量
+            bgMusic.volume = volumeSlider.value / 100;
+            
+            // 显示播放提示
+            setTimeout(() => {
+                alert("请点击播放按钮开始播放浪漫背景音乐");
+            }, 500);
+        }
+        
+        // 音乐控制
+        playBtn.addEventListener('click', function() {
+            bgMusic.play().catch(e => {
+                console.log("播放失败:", e);
+                alert("音乐播放失败，请检查网络连接或尝试刷新页面");
+            });
+        });
+        
+        pauseBtn.addEventListener('click', function() {
+            bgMusic.pause();
+        });
+        
+        // 音量控制
+        volumeSlider.addEventListener('input', function() {
+            bgMusic.volume = this.value / 100;
+        });
+        
+        // 页面加载时创建一些基础特效
+        createFloatingHearts();
+        createPulseHearts();
+    </script>
+</body>
+</html>
